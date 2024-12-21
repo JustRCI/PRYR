@@ -1,0 +1,564 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
+
+:root {
+  --color-bg1: rgb(8, 10, 15);
+  --color-bg2: rgb(0, 17, 32);
+  --color1: 18, 113, 255;
+  --color2: 107, 74, 255;
+  --color3: 100, 100, 255;
+  --color4: 50, 160, 220;
+  --color5: 80, 47, 122;
+  --color-interactive: 140, 100, 255;
+  --circle-size: 80%;
+  --blending: hard-light;
+}
+
+
+* {
+  margin:0;
+  padding:0;
+  outline:none;
+  text-decoration:none;
+  box-sizing:border-box;
+  color:#FFF;
+  background: transparent;
+  border:none;
+}
+
+html, body {
+  font-family: 'Dongle', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: #FFF;
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.card {
+  position: absolute;
+  z-index: 10;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  user-select: none;
+  width:1080px;
+  height: 1920px;
+  padding: 48px;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 4px 90px rgba(0,0,0,0.1);
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,1) 34%, rgba(255,255,255,1) 89%, rgba(255,255,255,0) 100%);
+    opacity: 0.3;
+    filter: blur(.5px);
+    mix-blend-mode: hard-light;
+  }
+
+
+  .noise {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    opacity: 0.1;
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    text-shadow: -3px 0px 2px rgba(0,0,0,0.1);
+  }
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+p {
+  line-height: 1.6;
+}
+
+
+@keyframes moveInCircle {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes moveVertical {
+  0% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes moveHorizontal {
+  0% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+  50% {
+    transform: translateX(50%) translateY(10%);
+  }
+  100% {
+    transform: translateX(-50%) translateY(-10%);
+  }
+}
+
+
+.gradient-bg {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(40deg, var(--color-bg1), var(--color-bg2));
+  top: 0;
+  left: 0;
+
+  .svgBlur {
+    display: none;
+  }
+
+  .noiseBg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    mix-blend-mode: soft-light;
+    opacity: 0.3;
+  }
+  .gradients-container {
+    filter: url(#goo) blur(40px) ;
+    width: 100%;
+    height: 100%;
+  }
+
+  .g1 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: center center;
+    animation: moveVertical 30s ease infinite;
+
+    opacity: 1;
+  }
+
+  .g2 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 400px);
+    animation: moveInCircle 20s reverse infinite;
+
+    opacity: 1;
+  }
+
+  .g3 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color3), 0.8) 0, rgba(var(--color3), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2 + 200px);
+    left: calc(50% - var(--circle-size) / 2 - 500px);
+
+    transform-origin: calc(50% + 400px);
+    animation: moveInCircle 40s linear infinite;
+
+    opacity: 1;
+  }
+
+  .g4 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: var(--circle-size);
+    height: var(--circle-size);
+    top: calc(50% - var(--circle-size) / 2);
+    left: calc(50% - var(--circle-size) / 2);
+
+    transform-origin: calc(50% - 200px);
+    animation: moveHorizontal 40s ease infinite;
+
+    opacity: 0.7;
+  }
+
+  .g5 {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: calc(var(--circle-size) * 2);
+    height: calc(var(--circle-size) * 2);
+    top: calc(50% - var(--circle-size));
+    left: calc(50% - var(--circle-size));
+
+    transform-origin: calc(50% - 800px) calc(50% + 200px);
+    animation: moveInCircle 20s ease infinite;
+
+    opacity: 1;
+  }
+
+  .interactive {
+    position: absolute;
+    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
+    mix-blend-mode: var(--blending);
+
+    width: 100%;
+    height: 100%;
+    top: -50%;
+    left: -50%;
+
+    opacity: 0.7;
+  }
+}
+  @font-face {
+    font-family: 'Montserrat'; /* Name your font family */
+    src: url('font/montserratRoboto/Montserrat-Medium.ttf'); /* Locate the .ttf file within your directory*/
+  }
+  @font-face {
+    font-family: 'Roboto'; /* Name your font family */
+    src: url('font/montserratRoboto/Roboto-Regular.ttf'); /* Locate the .ttf file within your directory*/
+  }
+  @font-face {
+    font-family: 'Lastica'; /* Name your font family */
+    src: url('img/lastica.ttf'); /* Locate the .ttf file within your directory*/
+  }
+  a{
+    font-family: 'Montserrat';
+    src: url('font/montserratRoboto/Montserrat-Medium.ttf');
+  }
+  .font1 {
+    font-family: 'Montserrat', sans-serif; /* Use the font family */
+  }
+  .font2{
+    font-family: 'Roboto', sans-serif; /* Use the font family */
+  }
+  
+  body, html {
+    height: 100%;
+    color: #777;
+    line-height: 1.8;
+  }
+  .navbar{
+    background-color: rgba(255, 255, 255, 0.8);
+    opacity: 100%;
+  }
+  /* Create a Parallax Effect */
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  /* First image (Logo. Full height) */
+  .bgimg-1 {
+    background-image: url('/w3images/parallax1.jpg');
+    min-height: 100%;
+  }
+  
+  /* Second image (Portfolio) */
+  .bgimg-2 {
+    background-image: url("/w3images/parallax2.jpg");
+    min-height: 400px;
+  }
+  
+  /* Third image (Contact) */
+  .bgimg-3 {
+    background-image: url("/w3images/parallax3.jpg");
+    min-height: 400px;
+  }
+  
+  .w3-wide {letter-spacing: 10px;}
+  .w3-hover-opacity {cursor: pointer;}
+  
+  /* Turn off parallax scrolling for tablets and phones */
+  @media only screen and (max-device-width: 1600px) {
+    .bgimg-1, .bgimg-2, .bgimg-3 {
+      background-attachment: scroll;
+      min-height: 400px;
+    }
+  }
+  
+  .card1 {
+      width: 400px;
+      height: 500px;
+      aspect-ratio: 1 / 0.7;
+      border-radius: 8px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden; /* Ensure the image doesn't overflow the card1 */
+  }
+  
+  .card1 .image-box {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+  }
+  
+  .card1 .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 90%;
+      border-radius: inherit;
+      transition: 0.5s ease-in-out;
+  }
+  
+  .card1::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid white;
+      border-radius: inherit;
+      opacity: 0;
+      transition: 0.4s ease-in-out;
+  }
+  
+  .card1:hover .image-box img {
+      filter: grayscale(1) brightness(0.4);
+  }
+  
+  .card1:hover::after {
+      opacity: 1; /* Changed from 100% to 1 for proper opacity */
+      inset: 20px;
+  }
+  
+  .content1 {
+      width: 80%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      opacity: 0; /* Start with hidden content */
+      transform: translate(-50%, -50%) scale(0.8); /* Start with a smaller scale */
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; /* Transition for opacity and scale */
+  }
+  
+  .card1:hover .content1 {
+      opacity: 1; /* Make content visible on hover */
+      transform: translate(-50%, -50%) scale(1); /* Scale to normal size */
+  }
+  .card2 {
+      width: 400px;
+      height: 500px;
+      aspect-ratio: 1 / 0.7;
+      border-radius: 8px;
+      position: relative;
+      cursor: pointer;
+      overflow: hidden; /* Ensure the image doesn't overflow the card2 */
+  }
+  
+  .card2 .image-box {
+      width: 100%;
+      height: 100%;
+      border-radius: inherit;
+  }
+  
+  .card2 .image-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 90%;
+      border-radius: inherit;
+      transition: 0.5s ease-in-out;
+  }
+  
+  .card2::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid white;
+      border-radius: inherit;
+      opacity: 0;
+      transition: 0.4s ease-in-out;
+  }
+  
+  .card2:hover .image-box img {
+      filter: grayscale(1) brightness(0.4);
+  }
+  
+  .card2:hover::after {
+      opacity: 1; /* Changed from 100% to 1 for proper opacity */
+      inset: 20px;
+  }
+  
+  .content1 {
+      width: 80%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      opacity: 0; /* Start with hidden content */
+      transform: translate(-50%, -50%) scale(0.8); /* Start with a smaller scale */
+      transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; /* Transition for opacity and scale */
+  }
+  
+  .card2:hover .content1 {
+      opacity: 1; /* Make content visible on hover */
+      transform: translate(-50%, -50%) scale(1); /* Scale to normal size */
+  }
+  .card3 {
+    width: 400px;
+    height: 500px;
+    aspect-ratio: 1 / 0.7;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden; /* Ensure the image doesn't overflow the card3 */
+}
+
+.card3 .image-box {
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+.card3 .image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 90%;
+    border-radius: inherit;
+    transition: 0.5s ease-in-out;
+}
+
+.card3::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 2px solid white;
+    border-radius: inherit;
+    opacity: 0;
+    transition: 0.4s ease-in-out;
+}
+
+.card3:hover .image-box img {
+    filter: grayscale(1) brightness(0.4);
+}
+
+.card3:hover::after {
+    opacity: 1; /* Changed from 100% to 1 for proper opacity */
+    inset: 20px;
+}
+
+.content1 {
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    opacity: 0; /* Start with hidden content */
+    transform: translate(-50%, -50%) scale(0.8); /* Start with a smaller scale */
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; /* Transition for opacity and scale */
+}
+
+.card3:hover .content1 {
+    opacity: 1; /* Make content visible on hover */
+    transform: translate(-50%, -50%) scale(1); /* Scale to normal size */
+}
+  
+      @media (max-width: 768px) {
+        .card {
+          width: 100%;
+        }
+      }
+      .containerall {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        padding: 20px;
+      }
+      .button {
+        width: 200px;
+        height: 300px;
+        position: absolute;
+        top: 50%;
+        right: 20px; /* Adjust this value to position the button */
+        transform: translateY(-50%);
+        z-index: 200;
+    }
+    
+    .button button{
+        width: 40px;
+        height: 35px;
+        border-radius: 8px;
+        border: none;
+        cursor: pointer;
+        border: 1px solid #000;
+        transition: 0.3s;
+    }
+    
+    .button button:hover{
+        background: #ababab;
+        color: #fff;
+    }
+.nav-item{
+  margin-bottom: 25px;
+}
+li {
+  display: list-item;
+  list-style-position: inside;
+  margin-left: auto;
+}
+.scroll
+{
+width:100%;
+height:100%;
+FLOAT: left;
+margin-left: 1%;
+padding: 1%;
+}
